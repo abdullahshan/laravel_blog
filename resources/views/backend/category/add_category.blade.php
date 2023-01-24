@@ -33,10 +33,11 @@
                 <div class="card-body">
                     <form action="{{ route('category.store') }}" method="POST">
                         @csrf
+                       <label for="">Title</label>
                         <input type="text"  name="title" class="form-control mt-2">
                         @error('title')
-                           <span style="color:red;"> {{ $message }}</span>
-                        @enderror
+                        <span style="color:red;"> {{ $message }}</span>
+                     @enderror
                         <input type="text"  name="slug" class="form-control mt-2 mb-2" >
                         <button name="submit" class="btn btn-primary">add-category</button>
                     </form>
@@ -49,10 +50,10 @@
         <div class="col-lg-8">
             <table class="table">
                     <tr>
-                        <td>#</td>
-                        <td>Category title</td>
-                        <td>Slug</td>
-                        <td>Actions</td>
+                        <th>Id</th>
+                        <th>Category title</th>
+                        <th>Slug</th>
+                        <th>Actions</th>
                     </tr>
                    @forelse ($data as $key => $sdata)
                     <tr>
@@ -75,13 +76,13 @@
                    
                       @forelse ($sdata->categories as $sub)
                     <tr>
-                        <td>{{ "" }}</td>
+                        <td><i data-feather="corner-down-right"></i> </td>
                         <td>{{ $sub->title }}</td>
-                        <td >{{ $sub->slug }}</td>
+                        <td colspan="2">{{ $sub->slug }}</td>
                        
                     </tr>
                       @empty
-                      <td colspan="4" style="color:red; font-size:18px;">sub_category not found!</td>
+                      <td colspan="4" style="color:red; font-size:15px;"> <i data-feather="corner-down-right"></i> sub_category not found!</td>
                       @endforelse 
                    @empty
                        <tr>

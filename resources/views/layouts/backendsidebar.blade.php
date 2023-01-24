@@ -35,8 +35,6 @@
                         <div class="side-menu__title"> Category_Manegment </div>
                     </a>
                 </li>
-            </ul>
-            <ul class="side-menu__sub-open">
                 <li>
                     <a href="{{ route('category.sub.add') }}" class="side-menu side-menu--active side-menu--open">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
@@ -45,8 +43,31 @@
                 </li>
             </ul>
         </li>
+    </ul>
+
+
+
+    <ul>
+        <li>
+            <a href="javascript:;" class="side-menu {{ request()->routeIs('post.*') ? 'side-menu--active side-menu--open' : '' }}">
+                <div class="side-menu__icon"> <i data-feather="folder"></i> </div>
+                <div class="side-menu__title">
+                    Post
+                    <div class="side-menu__sub-icon"> <i data-feather="chevron-down"></i> </div>
+                </div>
+            </a>
+            <ul class="side-menu__sub-open">
+                <li>
+                    <a href="{{ route('post.add') }}" class="side-menu side-menu--active side-menu--open">
+                        <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                        <div class="side-menu__title"> Category_Manegment </div>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
         
        
     </ul>
+    
 </nav>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\backendController;
 use App\Http\Controllers\backend\CategoryController;
+use App\Http\Controllers\backend\PostController;
 use App\Http\Controllers\backend\subcategoryController;
 use App\Http\Controllers\frontend\frontendController;
 use App\Models\subcategory;
@@ -52,7 +53,13 @@ Route::prefix('/subcategory')->name('sub.')->group(function () {
 });
 
 
+});
 
+
+
+Route::prefix('/post')->name('post.')->group(function(){
+
+        Route::get('/add',[PostController::class,'addpost'])->name('add');
 });
 
 

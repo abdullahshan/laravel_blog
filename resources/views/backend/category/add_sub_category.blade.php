@@ -95,7 +95,9 @@
                    
                        
                    @empty
-                       
+                   <tr>
+                    <td colspan="5" style="color:red; font-size:30px;">Data not found!</td>
+                   </tr>
                    @endforelse
             </table>
         </div>
