@@ -81,12 +81,13 @@
                         <td>{{ $sdata->category->title }}</td>
                         <td>
                             <div class="btn-group">
-                                <a href="{{ route('category.sub.edit', $sdata) }}" class="btn btn-primary btn-sm">edit</a>
+                                <a style="border-radius: 5px;" href="{{ route('category.sub.edit', $sdata) }}" class="btn btn-primary btn-sm">edit</a>
+                                <a style="border-radius: 5px;" href="#" class="btn btn-danger btn-sm deletebtn">delete</a>
                              
                              <form action="{{ route('category.sub.delete', $sdata) }}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger btn-sm">delete</button>
+        
                             </form>
                 
                             </div>
@@ -104,6 +105,32 @@
     </div>
 
 @endsection
+
+@push('customjs')
+
+    <script>
+        $('.deletebtn').click(function() { 
+          
+            Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+
+        $(this).next('form').submit();
+  }
+})
+
+            
+        });
+    </script>
+    
+@endpush
 
 
 

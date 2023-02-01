@@ -60,6 +60,8 @@ Route::prefix('/subcategory')->name('sub.')->group(function () {
 Route::prefix('/post')->name('post.')->group(function(){
 
         Route::get('/add',[PostController::class,'addpost'])->name('add');
+        Route::post('/add',[PostController::class,'storepost'])->name('store');
+
 });
 
 

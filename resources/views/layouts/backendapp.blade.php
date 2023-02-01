@@ -268,6 +268,12 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBG7gNHAhDzgYmq4-EHvM4bqW1DNj2UCuk&libraries=places"></script>
         <script src="{{ asset('backend/js/app.js') }}"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+        
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+          @stack('customjs')
         <!-- END: JS Assets-->
     </body>
 </html>
