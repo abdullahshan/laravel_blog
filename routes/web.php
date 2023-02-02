@@ -19,7 +19,16 @@ use App\Models\subcategory;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//frontend route//
 Route::get('/', [frontendController::class, 'index'])->name('frontend.home');
+Route::get('/category_post/{category:slug}', [frontendController::class, 'frontend_post'])->name('frontend.post');
+Route::get('/subcategory_post/{categories:slug}', [frontendController::class, 'frontend_sub_post'])->name('frontend.sub_post');
+
+
+
+
+
    
 
 Auth::routes();
@@ -61,6 +70,8 @@ Route::prefix('/post')->name('post.')->group(function(){
 
         Route::get('/add',[PostController::class,'addpost'])->name('add');
         Route::post('/add',[PostController::class,'storepost'])->name('store');
+        Route::get('/allpost',[PostController::class,'allpost'])->name('allpost');
+
 
 });
 

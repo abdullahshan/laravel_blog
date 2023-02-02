@@ -60,7 +60,13 @@
                 <li>
                     <a href="{{ route('post.add') }}" class="side-menu side-menu--active side-menu--open">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Category_Manegment </div>
+                        <div class="side-menu__title"> Post_Manegment </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('post.allpost') }}" class="side-menu side-menu--active side-menu--open">
+                        <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                        <div class="side-menu__title"> View_all_POst </div>
                     </a>
                 </li>
             </ul>

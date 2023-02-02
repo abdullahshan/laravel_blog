@@ -9,4 +9,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class post extends Model
 {
     use HasFactory, HasTags;
+
+
+    public function user(){
+
+        return  $this->belongsTo(user::class);
+    }
 }

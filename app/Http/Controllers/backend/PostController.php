@@ -22,6 +22,7 @@ class PostController extends Controller
 
     public function storepost(Request $request){
 
+
         // $tag = Tag::create(['name' => 'my tag']);
 
     
@@ -35,13 +36,13 @@ class PostController extends Controller
       $data->subcategory_id = $request->subcategory_id;
       $data->title = $request->title;
       $data->slug = $this->getslug($request->title);
-      $data->type = "type";
+      $data->type = $request->type;
+      $data->content = $request->content;
       if($request->hasFile('image')){
       
             $data->image = $this->project_image($request);
 
      }
-      $data->content = $request->content;
 
       $data->save();
 
@@ -82,6 +83,14 @@ class PostController extends Controller
            }
 
           
+    }
+
+
+
+    public function allpost(){
+
+        $posts = post::all();
+        return view('backend.post.allpost',compact('posts'));
     }
     
 
