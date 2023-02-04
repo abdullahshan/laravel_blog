@@ -71,6 +71,12 @@ Route::prefix('/post')->name('post.')->group(function(){
         Route::get('/add',[PostController::class,'addpost'])->name('add');
         Route::post('/add',[PostController::class,'storepost'])->name('store');
         Route::get('/allpost',[PostController::class,'allpost'])->name('allpost');
+        Route::get('/edit/{category:slug}',[PostController::class,'edit'])->name('edit');
+        Route::post('/update/{category:slug}',[PostController::class,'update'])->name('update');
+        Route::delete('/delete/{category:slug}',[PostController::class,'delete'])->name('delete');
+
+
+
 
 
 });
