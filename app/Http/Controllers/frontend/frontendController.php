@@ -44,4 +44,37 @@ class frontendController extends Controller
         return view('frontend.category_view',compact('category','data','post'));
 
     }
+
+    // single_block_post//
+
+    public function single_post($slug){
+
+     
+        $postdata = post:: where('slug', $slug)->with('category')->with('user')->with('tags')->first();
+
+        // dd($postdata);
+
+        $category = Category::with('categories')->latest()->get();
+
+      
+
+        return view('frontend.singleblock',compact('category','postdata'));
+    }
+
+    //postdata search//
+
+    public function search(Request $request){
+
+         $post = post::where('title', 'LIKE', '%'. $request->search_text .'%')->get();
+
+         if($post->count() == 0){
+
+            return response('Post not found!',404);
+
+            exit;
+         }
+
+         return json_encode($post);
+         
+    }
 }

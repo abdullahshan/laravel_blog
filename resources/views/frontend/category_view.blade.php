@@ -37,7 +37,7 @@
                             <span class="post-format">
                                 <i class="icon-picture"></i>
                             </span>
-                            <a href="blog-single.html">
+                            <a href="{{ route('frontend.singlepost', $s_post) }}">
                                 <div class="inner">
                                     <img style="max-height: 300px;" src="{{ asset('storage/' .  $s_post->image) }}" alt="{{ $s_post->image }}" />
                                 </div>

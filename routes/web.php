@@ -24,7 +24,8 @@ use App\Models\subcategory;
 Route::get('/', [frontendController::class, 'index'])->name('frontend.home');
 Route::get('/category_post/{category:slug}', [frontendController::class, 'frontend_post'])->name('frontend.post');
 Route::get('/subcategory_post/{categories:slug}', [frontendController::class, 'frontend_sub_post'])->name('frontend.sub_post');
-
+Route::get('/single_block/{category:slug}',[frontendController::class,'single_post'])->name('frontend.singlepost');
+Route::get('/search',[frontendController::class,'search'])->name('frontend.search.post');
 
 
 
@@ -74,9 +75,7 @@ Route::prefix('/post')->name('post.')->group(function(){
         Route::get('/edit/{category:slug}',[PostController::class,'edit'])->name('edit');
         Route::post('/update/{category:slug}',[PostController::class,'update'])->name('update');
         Route::delete('/delete/{category:slug}',[PostController::class,'delete'])->name('delete');
-
-
-
+      
 
 
 });

@@ -194,9 +194,22 @@
 		</div>
 		<!-- form -->
 		<form class="d-flex search-form">
-			<input class="form-control me-2" type="search" placeholder="Search and press enter ..." aria-label="Search">
+			<input name="search_text" id="searchbutton" class="form-control me-2" type="search" placeholder="Search and press enter ..." aria-label="Search">
 			<button class="btn btn-default btn-lg" type="submit"><i class="icon-magnifier"></i></button>
 		</form>
+
+            <ul style="list-style: none; margin-top: 20px" id="searchresult" class="text-center">
+                {{-- <li class="border-bottom py-3">
+                    <div class="row" style="align-items: center">
+                        <div class="col-lg-3">
+                            <img src="{{ asset('storage/upload/hello.png') }}" alt="">
+                        </div>
+                        <div class="col-lg-9">
+                            <h5><a href="">Lorem ipsum dolor neque temporibus!</a></h5>
+                        </div>
+                    </div>
+                </li> --}}
+            </ul>
 	</div>
 </div>
 
@@ -257,6 +270,67 @@
 <script src="{{ asset('frontend/js/slick.min.js') }}"></script>
 <script src="{{ asset('frontend/js/jquery.sticky-sidebar.min.js') }}"></script>
 <script src="{{ asset('frontend/js/custom.js') }}"></script>
+
+<script>
+
+        $('#searchbutton').on('keyup', function(){
+
+            let value = $(this).val();
+
+                // console.log(value);
+
+                if(value.length > 1 ){
+
+                    $.ajax({
+                    method: 'GET',
+                    url: "{{ route('frontend.search.post') }}",
+                    data: {search_text: value},
+                    success: function(d) {
+                    
+                        let results = JSON.parse(d)
+
+                        // console.log(result);
+
+                        let posts = []
+
+                        results.forEach(result => {
+
+                        let data = `
+                        <li class="border-bottom py-3" style="list-style: none;">
+                            <div class="row" style="align-items: center">
+                                <div class="col-lg-3">
+                                    <img src="{{ asset('storage/') }}/${result.image}" alt="">
+                                </div>
+                                <div class="col-lg-9">
+                                    <h5><a href="">${result.title}</a></h5>
+                                </div>
+                            </div>
+                        </li>
+                            `;
+
+                        posts.push(data)
+                            
+                        }); 
+
+                        $('#searchresult').html(posts)
+
+                    },
+                    error: function(error){
+
+                        $('#searchresult').html(`<h3 style="color:red;">${error.responseText}</h3>`)
+
+                    }
+
+                });
+
+                }else{
+
+                    $('#searchresult').html('')
+                }
+                  
+        })
+
+</script>
 
 </body>
 </html>
