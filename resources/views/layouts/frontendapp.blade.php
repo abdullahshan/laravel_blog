@@ -118,32 +118,32 @@
 			<div class="instagram-feed d-flex flex-wrap">
 				<div class="insta-item col-sm-2 col-6 col-md-2">
 					<a href="index.html#">
-						<img src="images/insta/insta-1.jpg" alt="insta-title" />
+						<img src="{{ asset('frontend/images/insta/insta-1.jpg') }}" alt="insta-title" />
 					</a>
 				</div>
 				<div class="insta-item col-sm-2 col-6 col-md-2">
 					<a href="index.html#">
-						<img src="images/insta/insta-2.jpg" alt="insta-title" />
+						<img src="{{ asset('frontend/images/insta/insta-2.jpg') }}" alt="insta-title" />
 					</a>
 				</div>
 				<div class="insta-item col-sm-2 col-6 col-md-2">
 					<a href="index.html#">
-						<img src="images/insta/insta-3.jpg" alt="insta-title" />
+						<img src="{{ asset('frontend/images/insta/insta-3.jpg') }}" alt="insta-title" />
 					</a>
 				</div>
 				<div class="insta-item col-sm-2 col-6 col-md-2">
 					<a href="index.html#">
-						<img src="images/insta/insta-4.jpg" alt="insta-title" />
+						<img src="{{ asset('frontend/images/insta/insta-4.jpg') }}" alt="insta-title" />
 					</a>
 				</div>
 				<div class="insta-item col-sm-2 col-6 col-md-2">
 					<a href="index.html#">
-						<img src="images/insta/insta-5.jpg" alt="insta-title" />
+						<img src="{{ asset('frontend/images/insta/insta-5.jpg') }}" alt="insta-title" />
 					</a>
 				</div>
 				<div class="insta-item col-sm-2 col-6 col-md-2">
 					<a href="index.html#">
-						<img src="images/insta/insta-6.jpg" alt="insta-title" />
+						<img src="{{ asset('frontend/images/insta/insta-6.jpg') }}" alt="insta-title" />
 					</a>
 				</div>
 			</div>
@@ -295,6 +295,15 @@
 
                         results.forEach(result => {
 
+                           
+
+                            let url = `{{ route('frontend.singlepost', ':slug') }}`;
+
+                             url = url.replace(':slug', result.slug);
+
+
+                            console.log(url)
+
                         let data = `
                         <li class="border-bottom py-3" style="list-style: none;">
                             <div class="row" style="align-items: center">
@@ -302,7 +311,7 @@
                                     <img src="{{ asset('storage/') }}/${result.image}" alt="">
                                 </div>
                                 <div class="col-lg-9">
-                                    <h5><a href="">${result.title}</a></h5>
+                                    <h5><a href="${url}">${result.title}</a></h5>
                                 </div>
                             </div>
                         </li>

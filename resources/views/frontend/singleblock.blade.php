@@ -50,7 +50,7 @@
 								<div class="col-md-6 col-12 text-center text-md-start">
 									<!-- tags -->
 									@forelse ($postdata->tags as $tag)
-                                    <a href="blog-single.html#" class="tag">{{ print_r(json_decode($tag->name)->name->name->en) }}</a>
+                                    <a href="blog-single.html#" class="tag">{{ print_r(json_decode($tag->name)->name) }}</a>
                                     @empty
                                         
                                     @endforelse

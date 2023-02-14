@@ -18,6 +18,28 @@
         </li>
        
     </ul>
+    <ul>
+        <li>
+            <a href="javascript:;" class="side-menu {{ request()->routeIs('role.*') ? 'side-menu--active side-menu--open' : '' }}">
+                <div class="side-menu__icon"> <i data-feather="folder"></i> </div>
+                <div class="side-menu__title">
+                    Role Manegment
+                    <div class="side-menu__sub-icon"> <i data-feather="chevron-down"></i> </div>
+                </div>
+            </a>
+            <ul class="side-menu__sub-open">
+                <li>
+                    <a href="{{ route('role.add') }}" class="side-menu side-menu--active side-menu--open">
+                        <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                        <div class="side-menu__title"> Role_Manegment </div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        
+       
+    </ul>
 
     <ul>
         <li>

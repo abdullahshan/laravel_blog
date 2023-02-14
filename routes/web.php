@@ -1,13 +1,17 @@
 <?php
 
+
+
+use App\Models\subcategory;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\backend\PostController;
+use App\Http\Controllers\backend\roleController;
 use App\Http\Controllers\backend\backendController;
 use App\Http\Controllers\backend\CategoryController;
-use App\Http\Controllers\backend\PostController;
-use App\Http\Controllers\backend\subcategoryController;
 use App\Http\Controllers\frontend\frontendController;
-use App\Models\subcategory;
+use App\Http\Controllers\backend\subcategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,11 +34,33 @@ Route::get('/search',[frontendController::class,'search'])->name('frontend.searc
 
 
 
+
    
 
 Auth::routes();
 
+Route::middleware('auth')->group(function(){
+
+
+
+
+//backend deshboard//
 Route::get('/deshboard', [backendController::class, 'index'])->name('backend.home');
+
+
+
+//Role Controller//
+Route::prefix('/role')->name('role.')->group(function(){
+        
+    Route::get('add',[roleController::class,'roleadd'])->name('add');
+    Route::post('store',[roleController::class,'store'])->name('store');
+    Route::get('edit/{id}',[roleController::class,'edit'])->name('edit');
+    Route::put('update/{id}',[roleController::class,'update'])->name('update');
+
+
+
+});
+
 
 /*Category Route*/
 
@@ -77,6 +103,8 @@ Route::prefix('/post')->name('post.')->group(function(){
         Route::delete('/delete/{category:slug}',[PostController::class,'delete'])->name('delete');
       
 
+
+});
 
 });
 

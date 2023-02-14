@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\post;
 use App\Models\subcategory;
 use Illuminate\Http\Request;
+use Spatie\Tags\Tag;
 
 class frontendController extends Controller
 {
@@ -14,7 +15,34 @@ class frontendController extends Controller
 
         $category = Category::with('categories')->latest()->get();
 
-        return view('frontend.home',compact('category'));
+        $posts = post::latest()->take(5)->with('user')->get();
+        $insprations = post::with('category')->with('user')->get();
+    
+        $latest_all = post::latest()->with('user')->with('category')->paginate(3);
+
+
+        $postall = post:: paginate(3);
+        $tags = Tag::all();
+
+        // foreach($tags as $tag){
+
+        //     print_r(json_decode($tag)->name);
+        // }
+
+
+        $first = post::latest()->with('category')->with('user')->first();
+        $trending_all = post::where('type','=','trending')->latest()->paginate(5);
+        $trending_all_old = post::where('type','=','trending')->oldest()->paginate(5);
+
+       
+
+        $Trending = post::where('type','=','trending')->with('category')->with('user')->oldest()->first();
+        $Trending_old = post::where('type','=','trending')->with('category')->with('user')->latest()->first();
+      
+       $men_fashinon = post:: where('category_id', 'category_id')->get();
+
+
+        return view('frontend.home',compact('category','posts','postall','first','tags','Trending','trending_all','trending_all_old','Trending_old','latest_all','insprations'));
     }
 
 
