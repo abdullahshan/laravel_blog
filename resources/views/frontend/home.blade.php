@@ -29,7 +29,9 @@
                     </div>
                     <a href="blog-single.html">
                         <div class="thumb rounded">
-                            <div class="inner data-bg-image"data-bg-image="{{ asset('storage/'. $first->image) }}"></div>
+                            <div class="inner data-bg-image"data-bg-image="@isset($first)
+                            {{ asset('storage/'. $first->image) }}
+                            @endisset"></div>
                         </div>
                     </a>
                 </div>

@@ -8,8 +8,10 @@
         <div class="col-lg-6 mx-auto mt-5">
          <div class="card">
              <div class="card-header">
-                 <h3>Add Role</h3>
+                 <h3>Edit Role</h3>
              </div>
+             @can('role edite')
+        
              <div class="card-body">
 
                 <form action="{{ route('role.update', $role->id) }}" method="post">
@@ -18,6 +20,7 @@
                      <input type="text" class="form-control" name="role" value="{{ $role->name }}">
                      <button class="btn btn-primary mt-5" style="width:100%">submit</button>
              </div>
+         
             </div>
         </div>
     </div>
@@ -59,7 +62,7 @@
 
             </form>
      
-      
+            @endcan   
         @else
           
       
@@ -70,6 +73,7 @@
          <div class="card-header">
              <h3>Add Role</h3>
          </div>
+         @can('role create')
          <div class="card-body">
              <form action="{{ route('role.store') }}" method="post">
                  @csrf
@@ -77,6 +81,7 @@
                  <button class="btn btn-primary mt-5" style="width:100%">submit</button>
              </form>
          </div>
+         @endcan
      </div>
     </div>
    </div>
@@ -105,8 +110,17 @@
                   <tr>
                      <td>{{ ++$key }}</td>
                      <td>{{ $role->name }}</td>
+                     @can('role edite')
+        
                      <td><a href="{{ route('role.edit', $role->id) }}" class="btn btn-primary">edit</a></td>
-                  </tr>
+                     @endcan
+                    </tr>
+                  @foreach ($role->permissions as $permission)
+                      <tr>
+                        <td><i data-feather="corner-down-right"></i></td>
+                        <td>{{ $permission->name }}</td>
+                      </tr>
+                  @endforeach
                     @endforeach
                    </tr>
                  </tbody>

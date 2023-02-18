@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Faker\Provider\ar_EG\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -13,7 +14,7 @@ class roleController extends Controller
 {
    public function roleadd(){
 
-        $roles = Role::where('name','!=','admin')->get();
+        $roles = Role::where('name','!=','admin')->with('permissions')->get();
 
     
         return view('backend.roles.addrole', compact('roles'));
@@ -32,6 +33,8 @@ class roleController extends Controller
     $role = Role::with('permissions')->find($id);
 
     $haspermission = $role->permissions->pluck('id');
+
+
 
     // dd($haspermission);
     $permissions = Permission::all();
@@ -52,6 +55,6 @@ class roleController extends Controller
 
         $role->syncPermissions($request->permissions);
 
-           return back();
+           return redirect()->route('role.add');
    }
 }

@@ -12,6 +12,8 @@ use App\Http\Controllers\backend\backendController;
 use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\frontend\frontendController;
 use App\Http\Controllers\backend\subcategoryController;
+use App\Http\Controllers\backend\userController;
+use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +41,7 @@ Route::get('/search',[frontendController::class,'search'])->name('frontend.searc
 
 Auth::routes();
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth')->middleware('isBan')->group(function(){
 
 
 
@@ -50,11 +52,11 @@ Route::get('/deshboard', [backendController::class, 'index'])->name('backend.hom
 
 
 //Role Controller//
-Route::prefix('/role')->name('role.')->group(function(){
+Route::prefix('/role')->name('role.')->middleware('permission:role create|role edite|role status')->group(function(){
         
     Route::get('add',[roleController::class,'roleadd'])->name('add');
     Route::post('store',[roleController::class,'store'])->name('store');
-    Route::get('edit/{id}',[roleController::class,'edit'])->name('edit');
+    Route::get('edit/{id}',[roleController::class,'edit'])->name('edit')->middleware('permission:role edite');
     Route::put('update/{id}',[roleController::class,'update'])->name('update');
 
 
@@ -62,18 +64,33 @@ Route::prefix('/role')->name('role.')->group(function(){
 });
 
 
+    Route::prefix('user')->name('user.')->middleware(['permission:user ban|user edite|user create'])->group(function(){
+
+        Route::get('/add',[userController::class, 'usercreate'])->name('add');
+        Route::post('/store',[userController::class, 'userstore'])->name('store')->middleware('permission:user create');
+        Route::get('/edit/{id}',[userController::class, 'useredite'])->name('edite')->middleware('permission:user edite');
+        Route::put('/rolesupdate/{id}',[userController::class, 'rolesupdate'])->name('rolesupdate');
+        Route::get('/userupdate/{id}',[userController::class, 'userupdate'])->name('userupdate')->middleware('permission:user edite');
+        Route::get('/userupdate/{id}',[userController::class, 'userupdate'])->name('userupdate');
+        Route::post('/updatestore/{id}',[userController::class, 'updatestore'])->name('updatestore');
+        Route::get('/ban/{id}',[userController::class, 'ban'])->name('ban')->middleware('permission:user ban');;
+
+});
+
+
+
 /*Category Route*/
 
 
-Route::prefix('/category')->name('category.')->group(function () {
+Route::prefix('/category')->name('category.')->middleware('permission:category delete|category edite|category create')->group(function () {
    
     //Category Route//
 
 Route::get('/add', [CategoryController::class, 'addcategory'])->name('add');
 Route::post('/store', [CategoryController::class, 'storecategory'])->name('store');
-Route::get('/edite/{category:slug}', [CategoryController::class, 'editcategory'])->name('edit');
+Route::get('/edite/{category:slug}', [CategoryController::class, 'editcategory'])->name('edit')->middleware('permission:category edite');
 Route::put('/update/{category:slug}', [CategoryController::class, 'updatecategory'])->name('update');
-Route::delete('/delete/{category:slug}', [CategoryController::class, 'deletecategory'])->name('delete');
+Route::delete('/delete/{category:slug}', [CategoryController::class, 'deletecategory'])->name('delete')->middleware('permission:category delete');
 
     //subCategory Route//
 
@@ -83,7 +100,7 @@ Route::prefix('/subcategory')->name('sub.')->group(function () {
     Route::post('/store',[subcategoryController::class,'store_sub_category'])->name('store');
     Route::get('/edit/{categories:slug}',[subcategoryController::class,'edit_sub_category'])->name('edit');
     Route::put('/update/{categories:slug}', [subcategoryController::class, 'update_sub_category'])->name('update');
-    Route::delete('/delete/{categories:slug}',[subcategoryController::class,'delete_sub_category'])->name('delete');
+    Route::delete('/delete/{categories:slug}',[subcategoryController::class,'delete_sub_category'])->name('delete')->middleware('permission:category delete');
 
 
 });
@@ -93,14 +110,14 @@ Route::prefix('/subcategory')->name('sub.')->group(function () {
 
 
 
-Route::prefix('/post')->name('post.')->group(function(){
+Route::prefix('/post')->name('post.')->middleware('permission:post delete|post edite|post create')->group(function(){
 
         Route::get('/add',[PostController::class,'addpost'])->name('add');
         Route::post('/add',[PostController::class,'storepost'])->name('store');
         Route::get('/allpost',[PostController::class,'allpost'])->name('allpost');
-        Route::get('/edit/{category:slug}',[PostController::class,'edit'])->name('edit');
-        Route::post('/update/{category:slug}',[PostController::class,'update'])->name('update');
-        Route::delete('/delete/{category:slug}',[PostController::class,'delete'])->name('delete');
+        Route::get('/edit/{category:slug}',[PostController::class,'edit'])->name('edit')->middleware('permission:post edite');
+        Route::post('/update/{category:slug}',[PostController::class,'update'])->name('update')->middleware('permission:post edite');
+        Route::delete('/delete/{category:slug}',[PostController::class,'delete'])->name('delete')->middleware('permission:post delete');
       
 
 

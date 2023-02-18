@@ -6,6 +6,9 @@
 
 <div class="card">
     <div class="card-header"><h2 style="font-size: 30px;">edit Post</h2></div>
+
+    @can('post edite')
+
     <div class="card-body">
         <form action="{{ route('post.update', $single_post) }}" method="POST" enctype="multipart/form-data">
 
@@ -55,12 +58,17 @@
            <button class="btn btn-primary">submit</button>
         </form>
     </div>
+
+    @endcan
 </div> 
 
 @else
 
 <div class="card">
     <div class="card-header"><h2 style="font-size: 30px;">Add Post</h2></div>
+    @can('post create')
+        
+
     <div class="card-body">
         <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
 
@@ -108,6 +116,7 @@
            <button class="btn btn-primary">submit</button>
         </form>
     </div>
+    @endcan
 </div>
 
 @endif

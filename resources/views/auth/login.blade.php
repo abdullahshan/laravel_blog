@@ -59,6 +59,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             @error('email')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
+                              @error('ban')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                             <input type="password" name="password" class="intro-x login__input form-control py-3 px-4 border-gray-300 d-block mt-4" placeholder="Password">
                        
                             @error('email')

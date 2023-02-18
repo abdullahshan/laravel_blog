@@ -30,6 +30,9 @@
 
             <div class="card">
                 <div class="card-header"><h2>Add Category</h2></div>
+                @can('category create')
+                    
+               
                 <div class="card-body">
                     <form action="{{ route('category.store') }}" method="POST">
                         @csrf
@@ -42,6 +45,7 @@
                         <button name="submit" class="btn btn-primary">add-category</button>
                     </form>
                 </div>
+                @endcan
             </div>
             @endif
 
@@ -62,9 +66,16 @@
                         <td>{{ $sdata->slug }}</td>
                         <td>
                             <div class="btn-group">
+
+                                @can('category edite')
                                 <a style="border-radius: 5px;" href="{{ route('category.edit', $sdata) }}" class="btn btn-primary btn-sm">edit</a>
+                                @endcan
+                               
+                                @can('category delete')
                                 <a style="border-radius: 5px;" href="#" class="btn btn-danger btn-sm deletebtn">delete</a>
-                                
+                                @endcan
+                              
+
                              <form action="{{ route('category.delete', $sdata) }}" method="POST">
                                 @csrf
                                 @method('delete')

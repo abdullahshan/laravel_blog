@@ -23,11 +23,15 @@
                         <td>{{ $post->title }}</td>
                         <td>{{ $post->category->title }}</td>
                         <td>{{ $post->subcategory->title }}</td>
-                        <td style="display: flex"><a class="btn btn-primary" href="{{ route('post.edit', $post) }}">edit</a>
-                    
 
+                  
+                        <td style="display: flex">
+                            @can('post edite')
+                            <a class="btn btn-primary" href="{{ route('post.edit', $post) }}">edit</a>
+                            @endcan
+                            @can('post delete')
                             <a class="btn btn-danger deletebtn" href="#">delete</a>
-
+                            @endcan
 
                             <form action="{{ route('post.delete', $post) }}" method="post" id="myForm">
                             @csrf
@@ -35,7 +39,9 @@
                            
                             </form>
                                 </td>
+                                 
                     </tr>
+                    
                     @empty
                         <div>
                             <span class="text-danger">Data not found!</span>

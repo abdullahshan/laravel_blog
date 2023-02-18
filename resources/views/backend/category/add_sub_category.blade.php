@@ -81,7 +81,11 @@
                         <td>{{ $sdata->category->title }}</td>
                         <td>
                             <div class="btn-group">
+                                @can('category edite')
                                 <a style="border-radius: 5px;" href="{{ route('category.sub.edit', $sdata) }}" class="btn btn-primary btn-sm">edit</a>
+                                @endcan
+                                @can('category delete')
+
                                 <a style="border-radius: 5px;" href="#" class="btn btn-danger btn-sm deletebtn">delete</a>
                              
                              <form action="{{ route('category.sub.delete', $sdata) }}" method="POST">
@@ -89,6 +93,8 @@
                                 @method('delete')
         
                             </form>
+
+                            @endcan
                 
                             </div>
                         </td>

@@ -18,6 +18,8 @@
         </li>
        
     </ul>
+
+    @canany(['role status' , 'role edite' , 'role create'])
     <ul>
         <li>
             <a href="javascript:;" class="side-menu {{ request()->routeIs('role.*') ? 'side-menu--active side-menu--open' : '' }}">
@@ -36,11 +38,35 @@
                 </li>
             </ul>
         </li>
+    </ul>
+    @endcanany
 
-        
-       
+    @canany(['user ban' , 'user create' , 'user edite'])
+    <ul>
+        <li>
+            <a href="javascript:;" class="side-menu {{ request()->routeIs('user.*') ? 'side-menu--active side-menu--open' : '' }}">
+                <div class="side-menu__icon"> <i data-feather="folder"></i> </div>
+                <div class="side-menu__title">
+                    User Manegment
+                    <div class="side-menu__sub-icon"> <i data-feather="chevron-down"></i> </div>
+                </div>
+            </a>
+            <ul class="side-menu__sub-open">
+                <li>
+                    <a href="{{ route('user.add') }}" class="side-menu side-menu--active side-menu--open">
+                        <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                        <div class="side-menu__title"> User create </div>
+                    </a>
+                </li>
+            </ul>
+        </li>
     </ul>
 
+  @endcan
+
+    
+    @canany(['category create', 'category edite', 'category delete'])
+        
     <ul>
         <li>
             <a href="javascript:;" class="side-menu {{ request()->routeIs('category.*') ? 'side-menu--active side-menu--open' : '' }}">
@@ -67,8 +93,9 @@
         </li>
     </ul>
 
+    @endcanany
 
-
+    @canany(['post delete', 'post edite', 'post create'])
     <ul>
         <li>
             <a href="javascript:;" class="side-menu {{ request()->routeIs('post.*') ? 'side-menu--active side-menu--open' : '' }}">
@@ -93,9 +120,8 @@
                 </li>
             </ul>
         </li>
-
-        
        
     </ul>
+    @endcanany
     
 </nav>
