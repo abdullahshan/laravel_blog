@@ -1,5 +1,5 @@
 <nav class="side-nav">
-    <a href="{{ route('backend.home') }}" style="color: white; font-size: 30px;" class="intro-x d-flex align-items-center ps-5 pt-4">
+    <a href="{{ route('frontend.home') }}" style="color: white; font-size: 30px;" class="intro-x d-flex align-items-center ps-5 pt-4">
        <h1>Blog</h1>
     </a>
     <div class="side-nav__devider my-6"></div>

@@ -98,8 +98,8 @@
                     <!-- widget about -->
                     <div class="widget rounded">
                         <div class="widget-about data-bg-image text-center" data-bg-image="images/map-bg.png">
-                            <img src="images/logo.svg" alt="logo" class="mb-4" />
-                            <p class="mb-4">Hello, We’re content writer who is fascinated by content fashion, celebrity and lifestyle. We helps clients bring the right content to the right people.</p>
+                            <img src="{{ asset('frontend/images/logo.svg') }}" alt="logo" class="mb-4" />
+                            <p claHello, We’re content writer who is fascinated by content fashion, celebrity and lifestyle. We helpss="mb-4">s clients bring the right content to the right people.</p>
                             <ul class="social-icons list-unstyled list-inline mb-0">
                                 <li class="list-inline-item"><a href="category.html#"><i class="fab fa-facebook-f"></i></a></li>
                                 <li class="list-inline-item"><a href="category.html#"><i class="fab fa-twitter"></i></a></li>
@@ -115,60 +115,31 @@
                     <div class="widget rounded">
                         <div class="widget-header text-center">
                             <h3 class="widget-title">Popular Posts</h3>
-                            <img src="images/wave.svg" class="wave" alt="wave" />
+                            <img src="{{ asset('frontend/images/wave.svg') }}" class="wave" alt="wave" />
                         </div>
                         <div class="widget-content">
-                            <!-- post -->
-                            <div class="post post-list-sm circle">
-                                <div class="thumb circle">
-                                    <span class="number">1</span>
-                                    <a href="blog-single.html">
-                                        <div class="inner">
-                                            <img src="images/posts/tabs-1.jpg" alt="post-title" />
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="details clearfix">
-                                    <h6 class="post-title my-0"><a href="blog-single.html">3 Easy Ways To Make Your iPhone Faster</a></h6>
-                                    <ul class="meta list-inline mt-1 mb-0">
-                                        <li class="list-inline-item">29 March 2021</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- post -->
-                            <div class="post post-list-sm circle">
-                                <div class="thumb circle">
-                                    <span class="number">2</span>
-                                    <a href="blog-single.html">
-                                        <div class="inner">
-                                            <img src="images/posts/tabs-2.jpg" alt="post-title" />
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="details clearfix">
-                                    <h6 class="post-title my-0"><a href="blog-single.html">An Incredibly Easy Method That Works For All</a></h6>
-                                    <ul class="meta list-inline mt-1 mb-0">
-                                        <li class="list-inline-item">29 March 2021</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- post -->
+                   
+
+                            @foreach ($posts as $post)
+                                 <!-- post -->
                             <div class="post post-list-sm circle">
                                 <div class="thumb circle">
                                     <span class="number">3</span>
                                     <a href="blog-single.html">
                                         <div class="inner">
-                                            <img src="images/posts/tabs-3.jpg" alt="post-title" />
+                                            <img src="{{ asset('storage/'. $post->image) }}" alt="{{ $post->title }}" />
                                         </div>
                                     </a>
                                 </div>
                                 <div class="details clearfix">
-                                    <h6 class="post-title my-0"><a href="blog-single.html">10 Ways To Immediately Start Selling Furniture</a></h6>
+                                    <h6 class="post-title my-0"><a href="blog-single.html">{{ $post->title }}</a></h6>
                                     <ul class="meta list-inline mt-1 mb-0">
-                                        <li class="list-inline-item">29 March 2021</li>
+                                        <li class="list-inline-item">{{ carbon\carbon::parse($post->created_at)->format('d M Y') }}</li>
                                     </ul>
                                 </div>
                             </div>
+                            @endforeach
+                           
                         </div>		
                     </div>
 
@@ -176,16 +147,26 @@
                     <div class="widget rounded">
                         <div class="widget-header text-center">
                             <h3 class="widget-title">Explore Topics</h3>
-                            <img src="images/wave.svg" class="wave" alt="wave" />
+                            <img src="{{ asset('frontend/images/wave.svg') }}" class="wave" alt="wave" />
                         </div>
                         <div class="widget-content">
                             <ul class="list">
-                                <li><a href="category.html#">Lifestyle</a><span>(5)</span></li>
-                                <li><a href="category.html#">Inspiration</a><span>(2)</span></li>
-                                <li><a href="category.html#">Fashion</a><span>(4)</span></li>
-                                <li><a href="category.html#">Politic</a><span>(1)</span></li>
-                                <li><a href="category.html#">Trending</a><span>(7)</span></li>
-                                <li><a href="category.html#">Culture</a><span>(3)</span></li>
+                              
+                             @foreach ($category as $single_category)
+                             <li><a href="category.html#">{{ $single_category->title }}</a>
+
+                               @isset($single_category->posts)
+                                @foreach ($single_category->posts as $post)
+
+                               <span>(
+                                    {{ $post->count() }}
+                                    )</span>
+
+                                @endforeach
+                             
+                               @endisset
+                            </li>
+                             @endforeach
                             </ul>
                         </div>
                         
@@ -195,7 +176,7 @@
                     <div class="widget rounded">
                         <div class="widget-header text-center">
                             <h3 class="widget-title">Newsletter</h3>
-                            <img src="images/wave.svg" class="wave" alt="wave" />
+                            <img src="{{ asset('frontend/images/wave.svg') }}" class="wave" alt="wave" />
                         </div>
                         <div class="widget-content">
                             <span class="newsletter-headline text-center mb-3">Join 70,000 subscribers!</span>
@@ -213,58 +194,33 @@
                     <div class="widget rounded">
                         <div class="widget-header text-center">
                             <h3 class="widget-title">Celebration</h3>
-                            <img src="images/wave.svg" class="wave" alt="wave" />
+                            <img src="{{ asset('frontend/images/wave.svg') }}" class="wave" alt="wave" />
                         </div>
                         <div class="widget-content">
                             <div class="post-carousel-widget">
-                                <!-- post -->
+                         
+
+                                @isset($allpost)
+                                    @foreach ($allpost as $single_post)
+                                         <!-- post -->
                                 <div class="post post-carousel">
                                     <div class="thumb rounded">
                                         <a href="category.html" class="category-badge position-absolute">How to</a>
                                         <a href="blog-single.html">
                                             <div class="inner">
-                                                <img src="images/widgets/widget-carousel-1.jpg" alt="post-title" />
+                                                <img src="{{ asset('storage/'. $single_post->image) }}" alt="post-title" />
                                             </div>
                                         </a>
                                     </div>
-                                    <h5 class="post-title mb-0 mt-4"><a href="blog-single.html">5 Easy Ways You Can Turn Future Into Success</a></h5>
+                                    <h5 class="post-title mb-0 mt-4"><a href="blog-single.html">{{ $single_post->title }}</a></h5>
                                     <ul class="meta list-inline mt-2 mb-0">
-                                        <li class="list-inline-item"><a href="category.html#">Katen Doe</a></li>
-                                        <li class="list-inline-item">29 March 2021</li>
+                                        <li class="list-inline-item"><a href="category.html#">{{ Str::ucfirst($single_post->user->name) }}</a></li>
+                                        <li class="list-inline-item">{{ carbon\carbon::parse($single_post->created_at)->format('m M Y') }}</li>
                                     </ul>
                                 </div>
-                                <!-- post -->
-                                <div class="post post-carousel">
-                                    <div class="thumb rounded">
-                                        <a href="category.html" class="category-badge position-absolute">Trending</a>
-                                        <a href="blog-single.html">
-                                            <div class="inner">
-                                                <img src="images/widgets/widget-carousel-2.jpg" alt="post-title" />
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <h5 class="post-title mb-0 mt-4"><a href="blog-single.html">Master The Art Of Nature With These 7 Tips</a></h5>
-                                    <ul class="meta list-inline mt-2 mb-0">
-                                        <li class="list-inline-item"><a href="category.html#">Katen Doe</a></li>
-                                        <li class="list-inline-item">29 March 2021</li>
-                                    </ul>
-                                </div>
-                                <!-- post -->
-                                <div class="post post-carousel">
-                                    <div class="thumb rounded">
-                                        <a href="category.html" class="category-badge position-absolute">How to</a>
-                                        <a href="blog-single.html">
-                                            <div class="inner">
-                                                <img src="images/widgets/widget-carousel-1.jpg" alt="post-title" />
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <h5 class="post-title mb-0 mt-4"><a href="blog-single.html">5 Easy Ways You Can Turn Future Into Success</a></h5>
-                                    <ul class="meta list-inline mt-2 mb-0">
-                                        <li class="list-inline-item"><a href="category.html#">Katen Doe</a></li>
-                                        <li class="list-inline-item">29 March 2021</li>
-                                    </ul>
-                                </div>
+                                    @endforeach
+                                @endisset
+                               
                             </div>
                             <!-- carousel arrows -->
                             <div class="slick-arrows-bot">
@@ -274,13 +230,13 @@
                         </div>		
                     </div>
 
-                    <!-- widget advertisement -->
+                    {{-- <!-- widget advertisement -->
                     <div class="widget no-container rounded text-md-center">
                         <span class="ads-title">- Sponsored Ad -</span>
                         <a href="category.html#" class="widget-ads">
                             <img src="images/ads/ad-360.png" alt="Advertisement" />	
                         </a>
-                    </div>
+                    </div> --}}
 
                     <!-- widget tags -->
                     <div class="widget rounded">

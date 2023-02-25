@@ -50,7 +50,7 @@
 								<div class="col-md-6 col-12 text-center text-md-start">
 									<!-- tags -->
 									@forelse ($postdata->tags as $tag)
-                                    <a href="blog-single.html#" class="tag">{{ print_r(json_decode($tag->name)->name) }}</a>
+                                    <a href="blog-single.html#" class="tag">{{ ($tag->name) }}</a>
                                     @empty
                                         
                                     @endforelse
@@ -75,7 +75,7 @@
 
 					<div class="about-author padding-30 rounded">
 						<div class="thumb">
-							<img src="images/other/avatar-about.png" alt="Katen Doe" />
+							<img src="{{ asset('frontend/images/other/avatar-about.png')}}" alt="Katen Doe" />
 						</div>
 						<div class="details">
 							<h4 class="name"><a href="blog-single.html#">Katen Doe</a></h4>
@@ -201,7 +201,7 @@
 						<!-- widget about -->
 						<div class="widget rounded">
 							<div class="widget-about data-bg-image text-center" data-bg-image="images/map-bg.png">
-								<img src="images/logo.svg" alt="logo" class="mb-4" />
+								<img src="{{ asset('frontend/images/logo.svg') }}" alt="logo" class="mb-4" />
 								<p class="mb-4">Hello, We’re content writer who is fascinated by content fashion, celebrity and lifestyle. We helps clients bring the right content to the right people.</p>
 								<ul class="social-icons list-unstyled list-inline mb-0">
 									<li class="list-inline-item"><a href="blog-single.html#"><i class="fab fa-facebook-f"></i></a></li>
@@ -218,57 +218,24 @@
 						<div class="widget rounded">
 							<div class="widget-header text-center">
 								<h3 class="widget-title">Popular Posts</h3>
-								<img src="images/wave.svg" class="wave" alt="wave" />
+								<img src="{{ asset('frontend/images/wave.svg') }}" class="wave" alt="wave" />
 							</div>
 							<div class="widget-content">
-								<!-- post -->
-								<div class="post post-list-sm circle">
-									<div class="thumb circle">
-										<span class="number">1</span>
-										<a href="blog-single.html">
-											<div class="inner">
-												<img src="images/posts/tabs-1.jpg" alt="post-title" />
-											</div>
-										</a>
-									</div>
-									<div class="details clearfix">
-										<h6 class="post-title my-0"><a href="blog-single.html">3 Easy Ways To Make Your iPhone Faster</a></h6>
-										<ul class="meta list-inline mt-1 mb-0">
-											<li class="list-inline-item">29 March 2021</li>
-										</ul>
-									</div>
-								</div>
-								<!-- post -->
-								<div class="post post-list-sm circle">
-									<div class="thumb circle">
-										<span class="number">2</span>
-										<a href="blog-single.html">
-											<div class="inner">
-												<img src="images/posts/tabs-2.jpg" alt="post-title" />
-											</div>
-										</a>
-									</div>
-									<div class="details clearfix">
-										<h6 class="post-title my-0"><a href="blog-single.html">An Incredibly Easy Method That Works For All</a></h6>
-										<ul class="meta list-inline mt-1 mb-0">
-											<li class="list-inline-item">29 March 2021</li>
-										</ul>
-									</div>
-								</div>
+		
 								<!-- post -->
 								<div class="post post-list-sm circle">
 									<div class="thumb circle">
 										<span class="number">3</span>
 										<a href="blog-single.html">
 											<div class="inner">
-												<img src="images/posts/tabs-3.jpg" alt="post-title" />
+												<img src="{{ asset('storage/'. $postdata->image) }}" alt="{{ asset('storage/'. $postdata->title) }}" />
 											</div>
 										</a>
 									</div>
 									<div class="details clearfix">
-										<h6 class="post-title my-0"><a href="blog-single.html">10 Ways To Immediately Start Selling Furniture</a></h6>
+										<h6 class="post-title my-0"><a href="blog-single.html">{{ $postdata->title }}</a></h6>
 										<ul class="meta list-inline mt-1 mb-0">
-											<li class="list-inline-item">29 March 2021</li>
+											<li class="list-inline-item">{{ carbon\carbon::parse($postdata->created_at)->diffforhumans() }}</li>
 										</ul>
 									</div>
 								</div>

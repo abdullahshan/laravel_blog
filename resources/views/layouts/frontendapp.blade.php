@@ -61,15 +61,35 @@
                         @endforeach
 						
 						<li class="nav-item">
-							<a class="nav-link" href="contact.html">Contact</a>
+							<a class="nav-link" href="{{ route('frontend.contact') }}">Contact</a>
 						</li>
                         <li class="nav-item">
                            
 							@auth
-                             <a class="nav-link" href="{{ route('login') }}">profile</a>
-        
+
+                            @if ($user_role == 'subs')
+                            <li class="nav-item mt-2">
+                                <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                              document.getElementById('logout-form').submit();">
+                                 {{ __('Logout') }}
+                             </a>
+                               </li>
+    
+                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                             @else
+                            <a class="nav-link" href="{{ route('backend.home') }}">profile</a> 
+                            @endif
+
+
+                         
+                            @else
+                           
+                           
                             <a class="nav-link" href="{{ route('login') }}">Login/Register</a>
+
                             @endauth
 
 						</li>
@@ -80,7 +100,7 @@
 				<div class="header-right">
 					<!-- social icons -->
 					<ul class="social-icons list-unstyled list-inline mb-0">
-						<li class="list-inline-item"><a href="index.html#"><i class="fab fa-facebook-f"></i></a></li>
+						<li class="list-inline-item"><a href="https://www.facebook.com/profile.php?id=100023210681979"><i class="fab fa-facebook-f"></i></a></li>
 						<li class="list-inline-item"><a href="index.html#"><i class="fab fa-twitter"></i></a></li>
 						<li class="list-inline-item"><a href="index.html#"><i class="fab fa-instagram"></i></a></li>
 						<li class="list-inline-item"><a href="index.html#"><i class="fab fa-pinterest"></i></a></li>
@@ -220,37 +240,34 @@
 
 	<!-- logo -->
 	<div class="logo">
-		<img src="images/logo.svg" alt="Katen" />
+		<img src="{{ asset('frontend/images/logo.svg') }}" alt="{{ asset('frontend/images/logo.svg') }}" />
 	</div>
 
 	<!-- menu -->
 	<nav>
 		<ul class="vertical-menu">
 			<li class="active">
-				<a href="index.html">Home</a>
-				<ul class="submenu">
-					<li><a href="index.html">Magazine</a></li>
-					<li><a href="personal.html">Personal</a></li>
-					<li><a href="personal-alt.html">Personal Alt</a></li>
-					<li><a href="minimal.html">Minimal</a></li>
-					<li><a href="classic.html">Classic</a></li>
-				</ul>
+				<a href="{{ route('frontend.home') }}">Home</a>
 			</li>
-			<li><a href="category.html">Lifestyle</a></li>
-			<li><a href="category.html">Inspiration</a></li>
-			<li>
-				<a href="index.html#">Pages</a>
-				<ul class="submenu">
-					<li><a href="category.html">Category</a></li>
-					<li><a href="blog-single.html">Blog Single</a></li>
-					<li><a href="blog-single-alt.html">Blog Single Alt</a></li>
-					<li><a href="about.html">About</a></li>
-					<li><a href="contact.html">Contact</a></li>
-				</ul>
-			</li>
+
+             
+         @foreach ($catdata as $sing_category)
+         <li>
+            <a href="{{ route('frontend.post', $sing_category) }}">{{ $sing_category->title }}</a>
+              
+                <ul class="{{ count($sing_category->categories) > 0 ? 'submenu' : '' }}">
+               @foreach ($sing_category->categories as $subcategory)
+               
+               <li><a href="{{ route('frontend.sub_post', $subcategory) }}">{{ $subcategory->title }}</a></li>
+           
+               @endforeach
+            </ul>
+        </li>
+         @endforeach
+           
 			<li><a href="contact.html">Contact</a></li>
 		</ul>
-	</nav>
+	</nav> 
 
 	<!-- social icons -->
 	<ul class="social-icons list-unstyled list-inline mb-0 mt-auto w-100">

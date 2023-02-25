@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class backendController extends Controller
 {
     public function index(){
+        
 
         return view('backend.deshboard');
     }

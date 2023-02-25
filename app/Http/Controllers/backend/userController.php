@@ -27,8 +27,22 @@ class userController extends Controller
     //user store//
     public function userstore(Request $request){
 
-            $user = new User();
+        $old_user = User::where('email',$request->email)->first();
 
+        if($old_user != null){
+
+            if($old_user->email == $request->email){
+
+                $old_user->name = $request->name;
+                $old_user->type = "1";
+                $old_user->email = $request->email;
+                $old_user->password = Hash::make($request->password);
+                $old_user->save();
+            }
+        }else{
+
+            $user = new User();
+    
             $user->name = $request->name;
             $user->type = "1";
             $user->email = $request->email;
@@ -38,8 +52,11 @@ class userController extends Controller
            
 
             $user->assignRole($request->role);
+        }
+       
+         return back();
 
-            return back();
+            
     }
 
     //User edite //

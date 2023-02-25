@@ -85,7 +85,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <title>Dashboard - Rubick - Bootstrap HTML Admin Template</title>
         <!-- BEGIN: CSS Assets-->
         <link rel="stylesheet" href="{{ asset('backend/css/app.css') }}"/>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+        {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"> --}}
         <!-- END: CSS Assets-->
     </head>
     <!-- END: Head -->
@@ -137,12 +137,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             @error('password')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
-                            <div class="intro-x w-full grid columns-12 gap-4 h-1 mt-3">
-                                <div class="g-col-3 h-full rounded bg-theme-9"></div>
-                                <div class="g-col-3 h-full rounded bg-theme-9"></div>
-                                <div class="g-col-3 h-full rounded bg-theme-9"></div>
-                                <div class="g-col-3 h-full rounded bg-gray-200 dark-bg-dark-2"></div>
-                            </div>
+                            
                             <a href="login-light-register.html" class="intro-x text-gray-600 d-block mt-2 fs-xs fs-sm-sm">What is a secure password?</a> 
                             <input type="text" name="password_confirmation" class="intro-x login__input form-control py-3 px-4 border-gray-300 d-block mt-4" placeholder="Password Confirmation">
                         </div>
@@ -154,6 +149,16 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="intro-x mt-5 mt-xl-8 text-center text-xl-start">
                             <button type="submit" class="btn btn-primary py-3 px-4 w-full w-xl-32 me-xl-3 align-top">Register</button>
                             <a href="{{ route('login') }}" class="btn btn-outline-secondary py-3 px-4 w-full w-xl-32 mt-3 mt-xl-0 align-top">Sign in</a>
+
+                        </div>
+
+                        <div class="intro-x mt-5 mt-xl-8 text-center text-xl-start">
+                            <a href="{{ route('google.login') }}" type="submit" class="btn btn-primary">Register with google</a>
+                            <a href="{{ route('facebook.login') }}" type="submit" class="btn btn-primary">Register with facebook</a>
+
+                        </div>
+                        <div class="intro-x mt-5 mt-xl-8 text-center text-xl-start">
+                            <a href="{{ route('github.login') }}" type="submit" class="btn btn-primary">Register with github</a>
                         </div>
 
                     </form> 

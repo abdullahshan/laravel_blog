@@ -29,9 +29,10 @@
                     </div>
                     <a href="blog-single.html">
                         <div class="thumb rounded">
-                            <div class="inner data-bg-image"data-bg-image="@isset($first)
+                            
+                            <div class="inner data-bg-image" data-bg-image=@if($first)
                             {{ asset('storage/'. $first->image) }}
-                            @endisset"></div>
+                            @endif></div>
                         </div>
                     </a>
                 </div>
@@ -68,7 +69,7 @@
                                 <div class="details clearfix">
                                     <h6 class="post-title my-0"><a href="blog-single.html">{{ $post->title }}</a></h6>
                                     <ul class="meta list-inline mt-1 mb-0">
-                                        <li class="list-inline-item">{{ $post->created_at }}</li>
+                                        <li class="list-inline-item">{{ carbon\carbon::parse($post->created_at)->format('d M Y') }}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -152,7 +153,7 @@
                                         {{ $first->user->name }}
                                     @endisset</a></li>
                                     <li class="list-inline-item">@isset($first)
-                                        {{ $first->created_at->diffforhumans() }}
+                                        {{ carbon\carbon::parse($first->created_at)->diffforhumans() }}
                                     @endisset</li>
                                 </ul>
                                 <h5 class="post-title mb-3 mt-3"><a href="blog-single.html">@isset($first)
@@ -582,10 +583,11 @@
                         <div class="widget-content">
                         
                            
-                           @foreach ($tags as $tag)
+                           {{-- @foreach ($tags as $tag) --}}
+                           @foreach($tags as $tag)
 
-                           <a href="{{ route('frontend.home') }}" class="tag"> #trending </a>
-                           {{-- <a href="{{ route('frontend.home') }}" class="tag">  {{ print_r(json_decode($tag)->name->en) }}</a> --}}
+                           <a href="{{ route('frontend.home') }}" class="tag"> #{{ $tag->name }} </a>
+            
                            @endforeach
                         </div>		
                     </div>

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\backend;
 
+use PDO;
 use App\Models\post;
 use Spatie\Tags\Tag;
 use App\Models\Category;
 use App\Models\subcategory;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use PDO;
 
 class PostController extends Controller
 {
@@ -46,11 +47,11 @@ class PostController extends Controller
 
       $data->save();
 
-      $tag = str($request->hastag)->explode(',');
+      $tags = str($request->hastag)->explode(',');
 
-      foreach ($tag as $tags){
+      foreach ($tags as $tag){
 
-        $mytag = Tag::findOrCreate(['name' => trim($tags)]);
+        $mytag = Tag::firstOrCreate(['name' => $tag, 'slug' => Str::slug($tag)]);
         $data->attachTag($mytag);
 
       }
